@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="css/global.css">
+    <script src="js/angularjs.min.js"></script>
+</head>
+
+<body ng-controller="HomeController">
+    <div class="container">
+        <div class="grid">
+            <div class="card" ng-repeat="item in items">
+                <img ng-src="{{ item.image }}" alt="{{ item.title }}">
+                <h4>{{ item.title }}</h4>
+                <p>{{ item.description }}</p>
+                <button class="card-btn" ng-click="buttonClick(item.title)">{{item.buttonText}}</button>
+
+                <div class="shine"></div>
+                <div class="background">
+                    <div class="tiles">
+                        <div class="tile tile-1"></div>
+                        <div class="tile tile-2"></div>
+                        <div class="tile tile-3"></div>
+                        <div class="tile tile-4"></div>
+                        <div class="tile tile-5"></div>
+                        <div class="tile tile-6"></div>
+                        <div class="tile tile-7"></div>
+                        <div class="tile tile-8"></div>
+                        <div class="tile tile-9"></div>
+                        <div class="tile tile-10"></div>
+                    </div>
+                    <div class="line line-1"></div>
+                    <div class="line line-2"></div>
+                    <div class="line line-3"></div>
+                </div>
+            </div>
+
+        </div>
+        <label class="day-night">
+            <input type="checkbox" ng-model="isLightMode" ng-change="toggleTheme()" checked />
+            <div></div>
+        </label>
+
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+
+        app.controller('HomeController', function ($scope) {
+            $scope.items = [
+                {
+                    title: 'Dummy Designer',
+                    image: 'assets/ddlogo.svg',
+                    description: 'Transforming visions into vibrant realities. Elevate your brand with expert design services that captivate and resonate. Your aesthetic journey starts here.',
+                    buttonText: 'View Products'
+                },
+                {
+                    title: 'DD studio',
+                    image: 'assets/ddlogo_studio.svg',
+                    description: 'Capture moments, create memories. Explore the artistry of timeless photography at our studio, specializing in visual storytelling magic.',
+                    buttonText: 'View Service'
+                },
+                {
+                    title: 'DD infotech Pvt Ltd',
+                    image: 'assets/ddlogo_infotech.svg',
+                    description: 'Transforming visions into digital reality. Elevate your web and Android experiences with cutting-edge solutions from our development studio.',
+                    buttonText: 'Visit Site'
+                }
+            ];
+
+            $scope.buttonClick = function (title) {
+                alert('Button clicked for ' + title);
+                // Add your custom logic here
+            };
+
+            $scope.isLightMode = true;
+
+            $scope.toggleTheme = function () {
+                $scope.isLightMode = !$scope.isLightMode;
+                document.querySelector("body").classList.add("toggle");
+
+                setTimeout(() => {
+                    document.querySelector("body").classList.toggle("light");
+                    setTimeout(() => document.querySelector("body").classList.remove("toggle"), 10);
+                }, 5);
+            };
+        });
+    </script>
+
+</body>
+
+</html>
